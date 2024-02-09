@@ -1,3 +1,4 @@
+// The path package contains utilities for working with URL paths.
 package path
 
 import (
