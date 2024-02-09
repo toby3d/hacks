@@ -2,13 +2,14 @@
 package testing
 
 import (
-	"bytes"
 	"errors"
 	"flag"
 	"io"
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 //nolint:gochecknoglobals // сompiler global flags cannot be read from within tests
@@ -67,7 +68,7 @@ func GoldenEqual(tb testing.TB, output io.Reader) {
 		tb.Fatal("cannot read golden file data:", err)
 	}
 
-	if !bytes.Equal(actual, expect) {
-		tb.Errorf("the test output does not match the contents of %s.golden file", tb.Name())
+	if diff := cmp.Diff(actual, expect); diff != "" {
+		tb.Error(diff)
 	}
 }
