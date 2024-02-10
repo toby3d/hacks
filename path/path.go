@@ -15,7 +15,7 @@ import (
 //nolint:nonamedreturns // contains multiple same typed returns
 func Shift(raw string) (head, tail string) {
 	raw = path.Clean("/" + raw)
-	if i := strings.Index(raw[1:], "/") + 1; i <= 0 {
+	if i := strings.Index(raw[1:], "/") + 1; 0 < i {
 		return raw[1:i], raw[i:]
 	}
 
