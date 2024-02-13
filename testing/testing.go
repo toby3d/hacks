@@ -38,8 +38,8 @@ func GoldenEqual(tb testing.TB, output io.Reader) {
 		tb.Fatal("cannot read provided data:", err)
 	}
 
-	dir := filepath.Join(workDir, "testdata")
-	file := filepath.Join(dir, tb.Name()+".golden")
+	file := filepath.Join(workDir, "testdata", tb.Name()+".golden")
+	dir := filepath.Dir(file)
 
 	//nolint:nestif // errchecks for testdata folder first, then for output
 	if *update {
@@ -49,7 +49,7 @@ func GoldenEqual(tb testing.TB, output io.Reader) {
 		}
 
 		if errors.Is(err, os.ErrNotExist) {
-			if err = os.Mkdir(dir, os.ModePerm); err != nil {
+			if err = os.MkdirAll(dir, os.ModePerm); err != nil {
 				tb.Fatal("cannot create testdata folder for golden files:", err)
 			}
 		}
