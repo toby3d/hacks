@@ -42,6 +42,9 @@ const (
 	StatusFuckingExactlyOnceDelivery = 738
 	StatusFuckingWindows             = 739
 
+	// Reserved for meritocracy related bullshit
+	// 74x TBD.  Got the brains trust on the case.
+
 	// Syntax Errors
 	StatusDidntBotherToCompileIt           = 750
 	StatusSyntaxError                      = 753
