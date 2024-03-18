@@ -22,6 +22,9 @@ var update = flag.Bool("update", false, "save current tests results as golden fi
 // be overwritten with the provided contents of output, creating the testdata/
 // directory if it does not exist.
 //
+// Check TestGoldenEqual in testing_test.go and testdata/TestGoldenEqual.golden
+// for example usage.
+//
 // See: https://youtu.be/8hQG7QlcLBk?t=749
 //
 //nolint:cyclop // no need for splitting
