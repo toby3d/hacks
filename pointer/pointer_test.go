@@ -1,22 +1,38 @@
 package pointer_test
 
 import (
-	"fmt"
-
 	"source.toby3d.me/toby3d/hacks/pointer"
 )
 
 func Example() {
-	val := struct {
-		Text string
-	}{Text: "Hello, World!"}
-	fmt.Printf("Value: %v\n", val)
+	// NOTE(toby3d): ResponsePayload can hold data in three states:
+	//
+	//   * nil value
+	//   * zero value: "", 0, false
+	//   * any valid value: "abc", 42, true
+	//
+	// So, for support all these states struct must have pointers to basic
+	// types.
+	type ResponsePayload struct {
+		Text   *string
+		Ok     *bool
+		Number *int
+	}
 
-	point := pointer.Of(val)
-	point.Text = "Hello, Go!"
-	fmt.Printf("Pointer: %v\n", point)
+	// NOTE(toby3d): the old way
+	ok := true
+	text := "hello, world"
+	num := 0
+	_ = ResponsePayload{
+		Text:   &text,
+		Ok:     &ok,
+		Number: &num,
+	}
 
-	// Output:
-	// Value: {Hello, World!}
-	// Pointer: &{Hello, Go!}
+	// NOTE(toby3d): hack-way
+	_ = ResponsePayload{
+		Text:   pointer.Of("hello, world"),
+		Ok:     pointer.Of(true),
+		Number: pointer.Of(0),
+	}
 }
