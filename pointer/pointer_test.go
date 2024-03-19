@@ -4,7 +4,7 @@ import (
 	"source.toby3d.me/toby3d/hacks/pointer"
 )
 
-func Example() {
+func ExampleOf() {
 	// NOTE(toby3d): ResponsePayload can hold data in three states:
 	//
 	//   * nil value
